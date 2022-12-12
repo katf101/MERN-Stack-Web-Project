@@ -14,7 +14,10 @@ import compression from "compression";
 import cookierSession from "cookie-session";
 import HTTP_STATUS from "http-status-codes";
 import "express-async-errors";
-export class MyServer {
+
+const SERVER_PORT = 5000;
+
+export class MyChatServer {
   private app: Application;
 
   constructor(app: Application) {
@@ -61,9 +64,22 @@ export class MyServer {
 
   private globalErrorHandler(app: Application): void {}
 
-  private startServer(app: Application): void {}
+  // 인스턴스 전달
+  private async startServer(app: Application): Promise<void> {
+    try {
+      const httpServer: http.Server = new http.Server(app);
+      // httpServer호출 후 전달
+      this.startHttpServer(httpServer);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   private createSocketIO(httpServer: http.Server): void {}
 
-  private startHttpServer(httpServer: http.Server): void {}
+  private startHttpServer(httpServer: http.Server): void {
+    httpServer.listen(SERVER_PORT, () => {
+      console.log(`Server running on port ${SERVER_PORT}`);
+    });
+  }
 }
