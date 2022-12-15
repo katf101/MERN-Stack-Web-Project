@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
+import { config } from "./config";
 
 export default () => {
   const connect = () => {
     mongoose
-      .connect("mongodb://localhost:27017/mychatapp-backend")
+      .connect(`${config.DATABASE_URL}`)
       .then(() => {
         console.log("!!! db 연결 성공");
       })

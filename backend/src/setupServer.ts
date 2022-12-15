@@ -11,9 +11,10 @@ import cors from "cors";
 import helmet from "helmet";
 import hpp from "hpp";
 import compression from "compression";
-import cookierSession from "cookie-session";
+import cookieSession from "cookie-session";
 import HTTP_STATUS from "http-status-codes";
 import "express-async-errors";
+import { config } from "./config";
 
 const SERVER_PORT = 5000;
 
@@ -34,11 +35,11 @@ export class MyChatServer {
 
   private securityMiddleware(app: Application): void {
     app.use(
-      cookierSession({
+      cookieSession({
         name: "session",
-        keys: ["test1", "test2"],
+        keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
         maxAge: 24 * 7 * 3600000, // 쿠키의 최대 기간 7일로 설정
-        secure: false,
+        secure: config.NODE_ENV !== "development",
       })
     );
     app.use(hpp());
@@ -46,7 +47,7 @@ export class MyChatServer {
     app.use(
       cors({
         // origin: "https://dev.chatapp.com",
-        origin: "*",
+        origin: config.CLIENT_URL,
         credentials: true,
         optionsSuccessStatus: 200,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
