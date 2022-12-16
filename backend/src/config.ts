@@ -10,6 +10,7 @@ class Config {
   public SECRET_KEY_ONE: string | undefined;
   public SECRET_KEY_TWO: string | undefined;
   public CLIENT_URL: string | undefined;
+  public REDIS_HOST: string | undefined;
 
   private readonly DEFAULT_DATABASE_URL =
     "mongodb://localhost:27017/mychatapp-backend";
