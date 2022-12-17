@@ -5,6 +5,7 @@ import {
   Response,
   Request,
   NextFunction,
+  application,
 } from "express";
 import http from "http";
 import cors from "cors";
@@ -16,6 +17,7 @@ import HTTP_STATUS from "http-status-codes";
 import { Server } from "socket.io";
 import { createClient } from "redis";
 import { createAdapter } from "@socket.io/redis-adapter";
+import appliationRoutes from "./routes";
 
 import "express-async-errors";
 import { config } from "./config";
@@ -65,7 +67,9 @@ export class MyChatServer {
     app.use(urlencoded({ extended: true, limit: "50mb" }));
   }
 
-  private routerMiddleware(app: Application): void {}
+  private routerMiddleware(app: Application): void {
+    appliationRoutes(app);
+  }
 
   private globalErrorHandler(app: Application): void {}
 
