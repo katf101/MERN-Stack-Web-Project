@@ -1,15 +1,18 @@
 import mongoose from "mongoose";
+import Logger from "bunyan";
 import { config } from "./config";
+
+const log: Logger = config.createLogger("setupDatabase");
 
 export default () => {
   const connect = () => {
     mongoose
       .connect(`${config.DATABASE_URL}`)
       .then(() => {
-        console.log("!!! db 연결 성공");
+        log.info("!!! db 연결 성공");
       })
       .catch((err) => {
-        console.log("!!! Error: " + err);
+        log.info("!!! Error: " + err);
         return process.exit(1); // 즉시 종료
       });
   };
