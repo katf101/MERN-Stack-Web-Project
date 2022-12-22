@@ -4,7 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon -r tsconfig-paths/register src/app.ts | bunyan"
+    "dev": "nodemon -r tsconfig-paths/register src/app.ts | bunyan",
+    "lint:check": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint 'src/**/*.ts' --fix",
+    "prettier:check": "prettier --check 'src/**/*.{ts,json}'",
+    "prettier:fix": "prettier --write 'src/**/*.{ts,json}'"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +38,11 @@
     "@types/cookie-session": "^2.0.44",
     "@types/cors": "^2.8.13",
     "@types/hpp": "^0.2.2",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.8.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.1"
   }
